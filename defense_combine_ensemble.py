@@ -60,8 +60,6 @@ class ImageFolderDataset(data.Dataset):
 def main():
     args = parser.parse_args()
 
-    #normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
-    #                                 std=[0.229, 0.224, 0.225])
     normalize = transforms.Normalize(mean=[0.500, 0.500, 0.500],
                                      std=[0.500, 0.500, 0.500])
     def preproc(img):
@@ -72,8 +70,6 @@ def main():
             return img.convert("RGB")
 
     transform = transforms.Compose([
-        
-
         transforms.Resize(310),
         transforms.Lambda(preproc),
         transforms.CenterCrop(299),
@@ -90,7 +86,7 @@ def main():
     arch_1 = ckpt_1["arch"]
     model_1 = getattr(models, arch_1)(num_classes=110, pretrained=None)
     model_1 = torch.nn.DataParallel(model_1)
-        #bhy
+    #bhy
     #state_dict =ckpt_1['state_dict']
     #from collections import OrderedDict
     #new_state_dict = OrderedDict()
@@ -211,9 +207,6 @@ def main():
                 output_9 += model_9(temp)/2
                 output_10 += model_10(temp)/2
 
-
-            # all_results.append(output_1)
-            # all_files.extend(file_list)
             _, predicted = torch.max(output_1.data+output_2.data+output_3.data+output_4.data+output_5.data+output_6.data+output_7.data+output_8.data+output_9.data+output_10.data, 1)
             for fullpath, pred in zip(file_list, predicted):
                 print("%s,%d" % (os.path.basename(fullpath), pred), file=fout)

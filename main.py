@@ -19,9 +19,6 @@ flags.DEFINE_string('log_dir', 'logs/', 'Path for logs')
 flags.DEFINE_string('input_dir', 'input_image', 'Path for input images')
 FLAGS = flags.FLAGS
 
-# parser = argparse.ArgumentParser()
-# parser.add_argument('--input_dir', required=True, help='Input directory.')
-
 
 def main(_):
     with tf.Session() as sess:

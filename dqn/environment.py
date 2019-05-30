@@ -15,9 +15,6 @@ class MyEnvironment(object):
         self.is_train = config.is_train
         self.count = 0  # count restoration step
         self.psnr, self.psnr_pre, self.psnr_init = 0., 0., 0.
-        # print(config.is_train)
-        # print('haha')
-        # print(config.input_dir)
         self.input_dir = config.input_dir
 
         if self.is_train:
@@ -41,12 +38,8 @@ class MyEnvironment(object):
             self.label_all = self.label_test
         else:
             if config.dataset == 'mine':
-                self.my_img_dir = self.input_dir+'/'#config.test_dir + 'mine/'
-                print(self.my_img_dir)
-                # print(os.listdir(self.my_img_dir))
+                self.my_img_dir = self.input_dir+'/'
                 self.my_img_list = os.listdir(self.my_img_dir)
-                # print('???')
-                print(self.my_img_dir)
                 self.my_img_list.sort()
                 self.my_img_idx = 0
 
@@ -254,21 +247,9 @@ class MyEnvironment(object):
             return None, None, None
         else:
             img_name = self.my_img_list[self.my_img_idx]
-            print('ceshi!!!!!')
-            print(img_name)
             base_name, base_left = os.path.splitext(img_name)
-            
-            
-            print(self.my_img_dir + img_name)
             my_img = cv2.imread(self.my_img_dir + img_name)
-            # print('********')
-            print(self.my_img_dir + img_name)
-            
-            # my_img = Image.open(self.my_img_dir + img_name)
             my_img = my_img[:,:,::-1] / 255.
-            print(np.shape(my_img))
-            print(base_name)
-            print(base_left)
             self.my_img_idx += 1
             return my_img, base_name, base_left
 

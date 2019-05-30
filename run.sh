@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-
 INPUT_DIR=$1
 OUTPUT_FILE=$2
 
