@@ -1,0 +1,13 @@
+FROM ufoym/deepo:pytorch-py36-cu90
+MAINTAINER cuihao.leo@gmail.com
+
+RUN mkdir /checkpoints \
+    && cd /checkpoints \
+    && wget http://114.214.167.31:8000/bianhy/ijcai/defence/fusai/5/senet154_finetune_2.pth.tar \
+    && wget http://114.214.167.31:8000/bianhy/ijcai/defence/fusai/5/densenet121_finetune_2.pth.tar \
+    && wget http://114.214.167.31:8000/bianhy/ijcai/defence/fusai/5/mobilenet_v2_finetune_2.pth.tar \
+    && wget http://114.214.167.31:8000/bianhy/ijcai/defence/fusai/5/resnet18.pth.tar \
+    && wget http://114.214.167.31:8000/bianhy/ijcai/defence/fusai/5/inceptionv4_finetune_2.pth.tar\
+    && wget http://114.214.167.31:8000/bianhy/ijcai/defence/fusai/5/inceptionresnetv2_finetune_2.pth.tar 
+ADD . /competition
+WORKDIR /competition
